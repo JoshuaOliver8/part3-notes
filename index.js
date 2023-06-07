@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 const Note = require('./models/note')
 
 app.use(cors())
@@ -23,24 +24,25 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(requestLogger)
 
+/*
 let notes = [
   {
     id: 1,
-    content: "HTML is easy",
+    content: 'HTML is easy',
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only JavaScript",
+    content: 'Browser can execute only JavaScript',
     important: false
   },
   {
     id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
+    content: 'GET and POST are the most important methods of HTTP protocol',
     important: true
   }
 ]
-
+*/
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
@@ -51,13 +53,6 @@ app.get('/api/notes', (req, res) => {
     res.json(notes)
   })
 })
-
-const generateId = () => {
-  const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
-    : 0
-  return maxId + 1
-}
 
 app.post('/api/notes', (request, response, next) => {
   const body = request.body
@@ -96,12 +91,12 @@ app.put('/api/notes/:id', (request, response, next) => {
   Note.findByIdAndUpdate(
     request.params.id,
     { content, important },
-    { new: true, runValidators: true, context: 'query'}
+    { new: true, runValidators: true, context: 'query' }
   )
-  .then(updatedNote => {
-    response.json(updatedNote)
-  })
-  .catch(error => next(error))
+    .then(updatedNote => {
+      response.json(updatedNote)
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/notes/:id', (request, response, next) => {
