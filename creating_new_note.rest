@@ -1,9 +1,18 @@
 DELETE http://localhost:3001/api/notes/647fc7f727d1582629642be8
 ###
-POST http://localhost:3001/api/notes
+POST http://localhost:3001/api/notes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY0OGExMzZiYzM3OTYzMjA0N2Q5ZmFkMSIsImlhdCI6MTY4Njg2NjA2OCwiZXhwIjoxNjg2ODY5NjY4fQ.sobXjR4agevpwuysazgcVfJ4lDtxDFZZSstSw5vtSNQ
+
+{
+  "content": "TESTING TESTING 123",
+  "important": true
+}
+###
+POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "content": "VS code rest client is a pretty handy tool",
-  "important": true
+  "username": "root",
+  "password": "salainen"
 }
